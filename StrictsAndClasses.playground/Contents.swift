@@ -26,7 +26,7 @@ class Maze {
         self.currentPosition = 0
         self.isWall = false
         self.isStart = false
-        self.isVisited = [Bool]()
+        self.isVisited = Array(repeating: false, count: 4)
         self.name = ""
         self.message = "Wilcome to The Maze"
         self.input = ""
@@ -44,64 +44,138 @@ class Maze {
         print("   |\(boardArr[2])|\(boardArr[3])|")
     }
     func startMaze () {
-        isWall = !isWall
+        setIsStart(isStart: true)
         displayMaze()
     }
+    func setIsStart(isStart:Bool){
+        self.isStart = isStart
+    }
+    func getIsStart()->Bool{
+        return self.isStart
+    }
     func move(direction: String) {
-        print("go to \(direction)")
-        switch direction {
-        case "right", "Right", "r", "R":
-            goRight()
-        case "left", "Left", "l", "L":
-            goLift()
-        case "top", "Top":
-            goTop()
-        case "bottom", "Bottom":
-            goBottom()
-        default:
-            "Please Type one of this dirctions: right, left, top, bottom"
+        if checkMove() {
+            
+            print("go to \(direction)")
+            switch direction {
+            case "right", "Right", "r", "R":
+                goRight()
+            case "left", "Left", "l", "L":
+                goLift()
+            case "top", "Top":
+                goTop()
+            case "bottom", "Bottom":
+                goBottom()
+            default:
+                "Please Type one of this dirctions: right, left, top, bottom"
+            }
         }
     }
-    func checkMove () {
+
+    func checkMove () -> Bool{
         // check is started , visited, wall,
         
-        // check currentPosition
-        if !trackPosition.contains(currentPosition) && isStart && !isVisited[currentPosition - 1] && !isWall {
-            trackPosition.append(currentPosition)
-        } else {
-            
-        }
-        // return Bool
+        let check = isStart && !isVisited[currentPosition] ? true :  false
+        return check
     }
+    
     func goRight() {
-        print("right")
+        if !boardArr[0].contains("👤") && !boardArr[1].contains("👤") && !boardArr[2].contains("👤") && !boardArr[3].contains("👤") {
+            boardArr[0] = "👤"
+            displayMaze()
+        }
+        else if currentPosition == 0 || currentPosition == 2{
+            boardArr[currentPosition] = "  "
+            isVisited[currentPosition] = true
+            currentPosition += 1
+            boardArr[currentPosition] = "👤"
+            displayMaze()
+            isComplete()
+        } else {
+            displayMaze()
+            print("there is no Exit here")
+        }
     }
     func goLift() {
         print("left")
+        if currentPosition == 1 || currentPosition == 3{
+            boardArr[currentPosition] = "  "
+            isVisited[currentPosition] = true
+            currentPosition -= 1
+            boardArr[currentPosition] = "👤"
+            displayMaze()
+            isComplete()
+        } else {
+            displayMaze()
+            print("there is no Exit here")
+        }
     }
     func goBottom () {
         print("bottom")
+        if currentPosition == 0 || currentPosition == 1{
+            boardArr[currentPosition] = "  "
+            isVisited[currentPosition] = true
+            currentPosition += 2
+            boardArr[currentPosition] = "👤"
+            displayMaze()
+            isComplete()
+        } else {
+            displayMaze()
+            print("there is no Exit here")
+        }
     }
     func goTop () {
         print("top")
+        if currentPosition == 3 {
+            boardArr[currentPosition] = "  "
+            isVisited[currentPosition] = true
+            currentPosition -= 2
+            boardArr[currentPosition] = "👤"
+            displayMaze()
+            isComplete()
+        } else {
+            displayMaze()
+            print("there is no Exit here")
+        }
     }
     func isComplete () {
-        
+        if isVisited.contains(false) {
+            print("Congratulation You Complated the Maze ")
+        }else {
+            print("try again")
+        }
     }
     
     
 }
+
+
+
+var player1 = Maze()
+player1
+// start maze
+player1.startMaze()
 
 //var boardArr = [
 //["👤", " "],
 //[" ", " "]
 //]
 //boardArr[0][0]
-
-var player1 = Maze()
-player1
-// start
-player1.startMaze()
 // choose a direction
-player1.move(direction: "Right")
-// check is started , visited, wall,
+
+player1.move(direction: "left")
+sleep(1)
+
+player1.move(direction: "right")
+sleep(1)
+
+player1.move(direction: "bottom")
+sleep(1)
+
+player1.move(direction: "left")
+sleep(1)
+
+player1.move(direction: "top")
+
+player1.isComplete()
+player1.isVisited
