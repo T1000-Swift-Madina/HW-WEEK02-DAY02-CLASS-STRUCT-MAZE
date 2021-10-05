@@ -25,7 +25,7 @@ func goLeft(changeplace:Int){
     }
 
 func isComplet() -> Bool{
-    if (isVisited[0] == "🥸" && isVisited[1] == "🥸" && isVisited[2] == "🥸" && isVisited[3] == "🥸" ) {
+    if (isVisited[0] == "🟢" && isVisited[1] == "🟢" && isVisited[2] == "🟢" && isVisited[3] == "🟢" ) {
         return true  }
     else {
         return false }
