@@ -15,6 +15,8 @@ import UIKit
  5. if wall, stay same position, print message, show options to move to another direction
  6. if go through all space End
  */
+
+// Edit: 1. make the user enter to the maze from anyware. 2. try make the array 2D, 3. user can move through maze although he visited the room
 class Maze {
 
     var currentPosition : Int , isWall: Bool, isStart: Bool, isVisited=[Bool]()
@@ -98,7 +100,7 @@ class Maze {
         }
     }
     func goLift() {
-        print("left")
+        
         if currentPosition == 1 || currentPosition == 3{
             boardArr[currentPosition] = "  "
             currentPosition -= 1
@@ -114,7 +116,7 @@ class Maze {
         }
     }
     func goBottom () {
-        print("bottom")
+        
         if currentPosition == 0 || currentPosition == 1{
             boardArr[currentPosition] = "  "
             currentPosition += 2
@@ -130,7 +132,7 @@ class Maze {
         }
     }
     func goTop () {
-        print("top")
+        
         if currentPosition == 3 || currentPosition == 2 {
             boardArr[currentPosition] = "  "
             currentPosition -= 2
@@ -163,21 +165,29 @@ player1
 // start maze
 player1.startMaze()
 
-
-player1.move(direction: "r")
-sleep(1)
-player1.currentPosition
-
 player1.move(direction: "bottom")
 sleep(1)
-
-player1.move(direction: "r")
+player1.move(direction: "bottom")
+player1.move(direction: "right")
 sleep(1)
-
 player1.move(direction: "top")
 sleep(1)
+player1.move(direction: "left")
 
-player1.move(direction: "top")
+//player1.move(direction: "r")
+//sleep(1)
+//player1.currentPosition
+//
+//player1.move(direction: "bottom")
+//sleep(1)
+//
+//player1.move(direction: "r")
+//sleep(1)
+//
+//player1.move(direction: "top")
+//sleep(1)
+//
+//player1.move(direction: "top")
 
 player1.isComplete()
 player1.isVisited
