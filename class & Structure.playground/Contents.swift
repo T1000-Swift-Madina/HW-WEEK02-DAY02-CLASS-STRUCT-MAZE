@@ -1,41 +1,57 @@
-class MAZE {
-  var currentPosition : Int
-  var isWall : Bool
-  var isStart : Bool
-  var isVisited : Bool
-  init (){
-    self.currentPosition = 0
-    self.isStart = false
+class Maze{
+    var isWall : Bool
+    init (){
     self.isWall = true
-    self.isVisited = true
-  }
-  func goForward () {
-    self.currentPosition += 1
-    self.isStart = true
-    self.isWall = false
-    self.isVisited = true
-    isCompletd()
-  }
-  func goBackward() {
-    self.currentPosition -= 1
-    self.isStart = true
-    self.isWall = false
-    self.isVisited = true
-    isCompletd()
- }
-  func isCompletd () -> Bool {
-    // check if all visited
-    if (currentPosition == 4){
-      return true
-    }else{
-      return false}
-  }
-}
-var maze = MAZE()
-maze.goForward()
-maze.goForward()
-maze.goForward()
-maze.goForward()
-maze.goBackward()
-maze.goForward()
-maze.isCompletd()
+    }
+ 
+    var playerPlace : [String] = ["false", "false", "false", "false"]
+    func goForward(position: Int){
+        playerPlace[position] = "true"
+        print(playerPlace)}// end of func goForward
+    
+        func goBackard (position: Int){
+            playerPlace[position] = "false"
+            print(playerPlace)
+        } // end of func goBackard
+
+    func goRight() {
+         self.isWall = true
+        print("no path , there is wall")
+    } //end of func goRight
+    
+    func goLeft() {
+         self.isWall = true
+         print("no path , there is wall")
+    }// end of goLeft
+    
+    func isComplate() {
+        if (playerPlace[0] == "true" && playerPlace[1] == "true" && playerPlace[2] == "true" && playerPlace[3] == "true"){
+            print("AWESOME !! YOU WON")
+            } else {
+            print("Keep going , you did't Complate the MAZE")}
+    }// end of func isComplate
+    }// end of class
+var startGame = Maze()
+startGame.goForward(position: 3)
+startGame.goBackard(position: 3)
+startGame.goRight()
+startGame.playerPlace
+startGame.isComplate()
+startGame.goLeft()
+startGame.goForward(position: 3)
+startGame.goForward(position: 2)
+startGame.goRight()
+startGame.playerPlace
+startGame.isComplate()
+startGame.goLeft()
+startGame.goForward(position: 1)
+startGame.goBackard(position: 1)
+startGame.goRight()
+startGame.playerPlace
+startGame.isComplate()
+startGame.goForward(position: 1)
+startGame.goForward(position: 0)
+startGame.goRight()
+startGame.playerPlace
+startGame.isComplate()
+
